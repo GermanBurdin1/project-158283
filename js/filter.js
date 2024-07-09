@@ -15,14 +15,19 @@ const sortByComments = (pictureA, pictureB) =>
   pictureB.comments.length - pictureA.comments.length;
 
 const getFilteredPictures = () => {
+  let filteredPictures = [];
   switch (currentFilter) {
     case Filter.RANDOM:
-      return [...pictures].sort(sortRandomly).slice(0, PICTURES_COUNT);
+      filteredPictures = [...pictures].sort(sortRandomly).slice(0, PICTURES_COUNT);
+      break;
     case Filter.DISCUSSED:
-      return [...pictures].sort(sortByComments);
+      filteredPictures = [...pictures].sort(sortByComments);
+      break;
     default:
-      return [...pictures];
+      filteredPictures = [...pictures];
   }
+  console.log('Filtered pictures:', filteredPictures); // Выводим отфильтрованные данные в консоль
+  return filteredPictures;
 };
 
 const setOnFilterClick = (callback) => {

@@ -6,13 +6,13 @@ import { init, getFilteredPictures } from './filter.js';
 
 setOnFormSubmit(async (data) => {
   try {
-    await sendData(data);
+    const newData = await sendData(data); // Получаем обновленные данные после отправки формы
+    console.log('Data after form submission:', newData); // Выводим данные в консоль
     hideModal();
     showSuccessMessage();
-    const newData = await getData(); // Получаем обновленные данные после отправки формы
-    console.log('Data after form submission:', newData); // Выводим данные в консоль
     createPhotoElements(newData); // Обновляем галерею с новыми данными
-  } catch {
+  } catch (error) {
+    console.error('Error submitting data:', error);
     showErrorMessage();
   }
 });
@@ -24,5 +24,6 @@ try {
   init(data, debounceRenderGallery);
   createPhotoElements(getFilteredPictures());
 } catch (err) {
+  console.error('Error fetching initial data:', err);
   showAlert(err.message);
 }

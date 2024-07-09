@@ -13,12 +13,16 @@ const ErrorText = {
 };
 
 const load = (route, errorText, method = Method.GET, body = null) =>
-  fetch(`${BASE_URL}${route}`, {method, body})
+  fetch(`${BASE_URL}${route}`, { method, body })
     .then((response) => {
       if (!response.ok) {
         throw new Error();
       }
       return response.json();
+    })
+    .then((data) => {
+      console.log(`Response from ${route}:`, data);
+      return data;
     })
     .catch(() => {
       throw new Error(errorText);
@@ -26,7 +30,13 @@ const load = (route, errorText, method = Method.GET, body = null) =>
 
 const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
 
-const sendData = (body) => load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
+const sendData = (body) =>
+  fetch(`${BASE_URL}${Route.SEND_DATA}`, { method: Method.POST, body })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(ErrorText.SEND_DATA);
+      }
+      return getData(); // После отправки данных, заново получаем обновленные данные
+    });
 
 export { getData, sendData };
-

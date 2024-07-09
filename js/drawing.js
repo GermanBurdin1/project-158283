@@ -6,6 +6,7 @@ let photos = [];
 const picturesContainer = document.querySelector('.pictures');
 
 function createPhotoElements(pictures) {
+  console.log('Photos to render:', pictures); // Выводим данные в консоль
   photos = pictures;
 
   // удаляем старые фото
