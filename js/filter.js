@@ -26,7 +26,7 @@ const getFilteredPictures = () => {
     default:
       filteredPictures = [...pictures];
   }
-  console.log('Filtered pictures:', filteredPictures); // Выводим отфильтрованные данные в консоль
+  console.log('Filtered pictures:', filteredPictures);
   return filteredPictures;
 };
 

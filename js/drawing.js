@@ -5,21 +5,20 @@ let photos = [];
 
 const picturesContainer = document.querySelector('.pictures');
 
-function createPhotoElements(pictures) {
-  console.log('Photos to render:', pictures); // Выводим данные в консоль
-  photos = pictures;
+const createPhotoElements = (pictures) => {
+  console.log('Photos to render:', pictures);
 
-  // удаляем старые фото
+  // Удаляем старые фото
   const oldPictures = picturesContainer.querySelectorAll('.picture');
   oldPictures.forEach((picture) => picture.remove());
 
   const picturesFragment = document.createDocumentFragment();
 
-  // находим шаблон
+  // Находим шаблон
   const pictureTemplate = document.querySelector('#picture');
 
   pictures.forEach((photo, index) => {
-    // клонируем шаблон
+    // Клонируем шаблон
     const pictureElement = pictureTemplate.content.firstElementChild.cloneNode(true);
     pictureElement.dataset.index = index;
 
@@ -27,7 +26,7 @@ function createPhotoElements(pictures) {
     const pictureLikes = pictureElement.querySelector('.picture__likes');
     const pictureComments = pictureElement.querySelector('.picture__comments');
 
-    // заполняем элементы данными из объекта фотографии
+    // Заполняем элементы данными из объекта фотографии
     pictureImg.src = photo.url;
     pictureLikes.textContent = photo.likes;
     pictureComments.textContent = photo.comments.length;
@@ -35,9 +34,9 @@ function createPhotoElements(pictures) {
     picturesFragment.appendChild(pictureElement);
   });
 
-  // вставляем фрагмент со всеми заполненными элементами в контейнер
+  // Вставляем фрагмент со всеми заполненными элементами в контейнер
   picturesContainer.appendChild(picturesFragment);
-}
+};
 
 function onPictureClick(evt) {
   const target = evt.target.closest('.picture');

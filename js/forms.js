@@ -16,7 +16,6 @@ const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 const submitButton = document.querySelector('button[type="submit"]');
 
-
 const submitButtonText = {
   IDLE: 'Отправить',
 };
@@ -127,13 +126,19 @@ const setOnFormSubmit = (cb) => {
     evt.preventDefault();
     const isValid = pristine.validate();
 
-    if(isValid) {
+    if (isValid) {
+      const formData = new FormData(form);
+      formData.forEach((value, key) => {
+        console.log(`Form data before submission: ${key}: ${value}`);
+      });
+
       blockSubmitButton();
-      await cb(new FormData(form));
+      await cb(formData);
       unblockSubmitButton();
     }
   });
 };
+
 
 fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);

@@ -36,7 +36,14 @@ const sendData = (body) =>
       if (!response.ok) {
         throw new Error(ErrorText.SEND_DATA);
       }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Data returned after POST:', data);
       return getData(); // После отправки данных, заново получаем обновленные данные
+    })
+    .then((data) => {
+      return data; // Убедимся, что возвращаем обновленные данные
     });
 
 export { getData, sendData };
