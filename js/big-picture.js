@@ -1,4 +1,5 @@
 function showBigPicture(photo) {
+  console.log('Photo data:', photo);
 
   const batchSize = 5;
 

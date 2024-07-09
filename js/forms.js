@@ -29,7 +29,7 @@ const pristine = new Pristine(form, {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown',onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
@@ -47,7 +47,7 @@ const isTextFieldFocused = () =>
   document.activeElement === commentField;
 
 function onDocumentKeydown(evt) {
-  if(evt.key === 'Escape' && !isTextFieldFocused() && ! document.querySelector('.error')) {
+  if (evt.key === 'Escape' && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
   }
@@ -56,7 +56,6 @@ function onDocumentKeydown(evt) {
 const onCancelButtonClick = () => {
   hideModal();
 };
-
 
 const onFileInputChange = () => {
   const file = fileField.files[0];
@@ -78,14 +77,13 @@ const onFileInputChange = () => {
   }
 };
 
-
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
 
 const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
 
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
-  return lowerCaseTags.length === new Set (lowerCaseTags).size;
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
 const validateTags = (value) => {
@@ -102,10 +100,8 @@ pristine.addValidator(
   HASHTAG_ERROR_TEXT,
 );
 
-//функция для валидации длины комментария
 const validateCommentCount = (value) => value.trim().length <= 140;
 
-//валидацтор длины комментария
 pristine.addValidator(
   commentField,
   validateCommentCount,
@@ -138,7 +134,6 @@ const setOnFormSubmit = (cb) => {
     }
   });
 };
-
 
 fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);

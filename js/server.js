@@ -39,11 +39,18 @@ const sendData = (body) =>
       return response.json();
     })
     .then((data) => {
-      console.log('Data returned after POST:', data);
-      return getData(); // После отправки данных, заново получаем обновленные данные
+      console.log('Data returned after POST:', data); // Убедимся, что данные возвращены
+      return getData(); // Получаем обновленные данные после отправки
     })
     .then((data) => {
+      console.log('Updated data after POST:', data); // Проверим, что обновленные данные содержат новое изображение
       return data; // Убедимся, что возвращаем обновленные данные
+    })
+    .catch((error) => {
+      console.error('Error during sendData:', error);
+      throw error;
     });
+
+
 
 export { getData, sendData };

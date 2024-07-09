@@ -6,7 +6,7 @@ let photos = [];
 const picturesContainer = document.querySelector('.pictures');
 
 const createPhotoElements = (pictures) => {
-  console.log('Photos to render:', pictures);
+  console.log('Photos to render:', pictures); // Логируем данные для отладки
 
   // Удаляем старые фото
   const oldPictures = picturesContainer.querySelectorAll('.picture');
@@ -16,8 +16,13 @@ const createPhotoElements = (pictures) => {
 
   // Находим шаблон
   const pictureTemplate = document.querySelector('#picture');
+  if (!pictureTemplate) {
+    console.error('Picture template not found');
+    return;
+  }
 
   pictures.forEach((photo, index) => {
+    console.log('Rendering photo:', photo); // Логируем каждое фото для отладки
     // Клонируем шаблон
     const pictureElement = pictureTemplate.content.firstElementChild.cloneNode(true);
     pictureElement.dataset.index = index;
@@ -37,6 +42,8 @@ const createPhotoElements = (pictures) => {
   // Вставляем фрагмент со всеми заполненными элементами в контейнер
   picturesContainer.appendChild(picturesFragment);
 };
+
+
 
 function onPictureClick(evt) {
   const target = evt.target.closest('.picture');

@@ -7,7 +7,7 @@ import { init, getFilteredPictures } from './filter.js';
 setOnFormSubmit(async (data) => {
   try {
     const newData = await sendData(data); // Получаем обновленные данные после отправки формы
-    console.log('Data after form submission:', newData); // Выводим данные в консоль
+    console.log('Data after form submission:', newData); // Выводим данные в консоль для проверки
     hideModal();
     showSuccessMessage();
     createPhotoElements(newData); // Обновляем галерею с новыми данными
@@ -19,7 +19,7 @@ setOnFormSubmit(async (data) => {
 
 try {
   const data = await getData();
-  console.log('Initial data:', data); // Выводим начальные данные в консоль
+  console.log('Initial data:', data); // Выводим начальные данные в консоль для проверки
   const debounceRenderGallery = debounce(() => createPhotoElements(getFilteredPictures()));
   init(data, debounceRenderGallery);
   createPhotoElements(getFilteredPictures());
@@ -27,3 +27,5 @@ try {
   console.error('Error fetching initial data:', err);
   showAlert(err.message);
 }
+
+
